@@ -81,6 +81,8 @@
         <li>QR 스캐너가 열리면 <b>WiFi를 선택해 연결</b> 합니다.</li>
         <li>아래 QR을 스캔합니다. 앱이 자동으로 다운로드·설치되고 키오스크로 잠깁니다.</li>
         <li>설치 후 <b>Account ID · License Code</b> 를 입력해 활성화합니다.</li>
+        <li>(권장) 하단 <b>뒤로/홈 버튼을 없애려면</b> 설정 → 디스플레이 → <b>탐색 모드 → 제스처 탐색</b> 으로 바꿉니다.
+          앱에서는 바꿀 수 없는 시스템 설정입니다.</li>
       </ol>
       <div class="qrbox">
         <img id="qr" src="provisioning-qr.png" alt="ScanGo 프로비저닝 QR" width="300" height="300">
@@ -117,19 +119,38 @@
     </a>
     <div class="card" style="margin-top:14px">
       <ol>
-        <li>ScanGo에서 <b>☰ → 직원 PIN → EXIT → PIN 재확인</b> 으로 키오스크를 잠시 해제합니다.</li>
+        <li>ScanGo에서 <b>☰ → 직원 PIN → EXIT → PIN 재확인</b> 으로 키오스크를 잠시 해제합니다.
+          (EXIT 는 <b>오너/어드민 권한 직원 PIN</b> 으로만 가능)</li>
         <li>위 버튼으로 RustDesk를 내려받아 설치합니다.</li>
         <li>RustDesk를 열고 경고창이 뜨면 <b>"다시 표시 안 함" 체크 → I Agree</b>, 알림 요청은 <b>Allow</b>.</li>
         <li><b>Share screen</b> 탭 → <b>Start service</b> → 화면 녹화 요청에 <b>Start now</b>.</li>
         <li>우측 상단 <b>⋮ → Set permanent password</b> 로 영구 암호를 설정합니다.</li>
-        <li>같은 화면의 <b>ID</b>(예: 1 228 570 464)를 확인해 적어둡니다.</li>
+        <li>같은 화면의 <b>ID</b>(예: 1 228 570 464)를 확인합니다. 옆의 <b>복사 아이콘</b>을 쓰면 오타를 막을 수 있습니다.</li>
         <li>설정 → <b>접근성</b> → <b>RustDesk Input</b> 과 <b>ScanGo</b> 를 모두 켭니다.
           (ScanGo 접근성은 재부팅 후 화면공유를 자동 승인하는 데 필요합니다.)</li>
         <li>ScanGo를 다시 열고 <b>☰ → 직원 PIN → SETTINGS → REMOTE</b> 에서 <b>6번의 ID를 입력</b>합니다.</li>
       </ol>
       <div class="warn">
         설정이 끝나면 태블릿에서 <b>RustDesk 앱을 다시 열지 마세요</b> — 화면공유 세션이 끊깁니다.
-        끊겼다면 RustDesk를 열어 <b>Start service</b> 를 다시 누르면 복구됩니다.
+        끊겼다면 RustDesk를 열어 <b>Stop service → Start service</b> 순서로 다시 시작하세요
+        (이미 실행 중으로 보여도 화면이 안 나오면 반드시 한 번 멈췄다 켜야 복구됩니다).
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <span class="tag re">참고</span>
+    <h2>4. 라이선스가 만료·정지되면</h2>
+    <p class="lead">앱은 시작할 때마다 라이선스 상태를 확인합니다.</p>
+    <div class="card">
+      <ol>
+        <li>만료(EXPIRED)·정지(SUSPENDED) 상태면 <b>빨간 경고 화면</b>이 뜨고 사용이 막힙니다.</li>
+        <li>포털에서 상태를 해제한 뒤 <b>CHECK AGAIN</b> 을 누르면 바로 복구됩니다.</li>
+        <li>다른 라이선스 코드로 다시 등록하려면 <b>RE-ACTIVATE</b> → 활성화 화면에서 새 코드를 입력합니다.</li>
+      </ol>
+      <div class="warn">
+        인터넷이 끊겨 상태를 확인하지 못할 때는 <b>막지 않습니다</b> — 통신 장애로 매장 영업이 멈추지 않도록 한 설계입니다.
       </div>
     </div>
   </section>
