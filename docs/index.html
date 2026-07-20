@@ -87,8 +87,7 @@
         <div class="qrnote">스캔 대상: <b id="ver">ScanGo 2.2.7 (227)</b> · 릴리즈할 때마다 자동 갱신됩니다</div>
       </div>
       <div class="warn">
-        원격지원(RustDesk)과 화면공유 자동승인은 QR로 설정되지 않습니다.
-        해당 기능이 필요하면 설치 후 <code>install-all.sh</code> 를 1회 실행하세요.
+        원격지원(RustDesk)은 QR로 설치되지 않습니다. 아래 <b>3번</b> 절차로 태블릿에서 바로 설치하세요.
       </div>
     </div>
   </section>
@@ -105,6 +104,33 @@
     </a>
     <div class="warn">
       이미 설치된 태블릿은 <b>직접 받을 필요가 없습니다</b>. 앱이 부팅 시와 6시간마다 스스로 최신 버전을 확인해 자동 설치합니다.
+    </div>
+  </section>
+
+
+  <section>
+    <span class="tag new">PC 불필요</span>
+    <h2>3. 원격지원(RustDesk) 설치</h2>
+    <p class="lead">지원팀이 태블릿 화면을 보고 도울 수 있게 합니다. 태블릿에서만 진행하며 PC가 필요 없습니다.</p>
+    <a class="btn" href="rustdesk-1.2.7-aarch64-signed.apk">
+      <span>RustDesk 내려받기<small>1.2.7 고정 · 최신 버전으로 업데이트하지 마세요</small></span><span class="arrow">↓</span>
+    </a>
+    <div class="card" style="margin-top:14px">
+      <ol>
+        <li>ScanGo에서 <b>☰ → 직원 PIN → EXIT → PIN 재확인</b> 으로 키오스크를 잠시 해제합니다.</li>
+        <li>위 버튼으로 RustDesk를 내려받아 설치합니다.</li>
+        <li>RustDesk를 열고 경고창이 뜨면 <b>"다시 표시 안 함" 체크 → I Agree</b>, 알림 요청은 <b>Allow</b>.</li>
+        <li><b>Share screen</b> 탭 → <b>Start service</b> → 화면 녹화 요청에 <b>Start now</b>.</li>
+        <li>우측 상단 <b>⋮ → Set permanent password</b> 로 영구 암호를 설정합니다.</li>
+        <li>같은 화면의 <b>ID</b>(예: 1 228 570 464)를 확인해 적어둡니다.</li>
+        <li>설정 → <b>접근성</b> → <b>RustDesk Input</b> 과 <b>ScanGo</b> 를 모두 켭니다.
+          (ScanGo 접근성은 재부팅 후 화면공유를 자동 승인하는 데 필요합니다.)</li>
+        <li>ScanGo를 다시 열고 <b>☰ → 직원 PIN → SETTINGS → REMOTE</b> 에서 <b>6번의 ID를 입력</b>합니다.</li>
+      </ol>
+      <div class="warn">
+        설정이 끝나면 태블릿에서 <b>RustDesk 앱을 다시 열지 마세요</b> — 화면공유 세션이 끊깁니다.
+        끊겼다면 RustDesk를 열어 <b>Start service</b> 를 다시 누르면 복구됩니다.
+      </div>
     </div>
   </section>
 
