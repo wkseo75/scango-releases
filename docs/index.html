@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScanGo 설치 · MiraKeyPOS</title>
+<style>
+  :root{
+    --paper:#faf8f3; --card:#fff; --ink:#14161b; --ink2:#3f434d; --muted:#6d7280;
+    --line:#e9e5da; --accent:#e0a400; --accent-ink:#7a5a00; --accent-soft:#fbf1d4;
+    --blue:#1e4fd6; --ok:#1f8a54; --ok-soft:#e2f2e8;
+    --shadow:0 1px 2px rgba(20,22,27,.05),0 6px 22px rgba(20,22,27,.06);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#111317;--card:#181b21;--ink:#f0eee9;--ink2:#c4c8d0;--muted:#8b909b;
+      --line:#282c34;--accent:#f5bd2e;--accent-ink:#f5bd2e;--accent-soft:#2a2413;
+      --blue:#6fa2ff;--ok:#4bd48a;--ok-soft:#13251b;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 26px rgba(0,0,0,.35);}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 72px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:20px}
+  .brand{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brand svg{width:22px;height:22px}
+  h1{font-size:clamp(26px,5vw,38px);line-height:1.1;letter-spacing:-.02em;margin:12px 0 6px;font-weight:800}
+  .sub{color:var(--ink2);max-width:56ch;margin:0}
+  h2{font-size:19px;font-weight:800;margin:0 0 4px}
+  section{margin-top:38px}
+  .lead{color:var(--muted);font-size:14px;margin:0 0 16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;
+    box-shadow:var(--shadow)}
+  .tag{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;
+    letter-spacing:.03em;margin-bottom:10px}
+  .tag.new{background:var(--accent-soft);color:var(--accent-ink)}
+  .tag.re{background:var(--ok-soft);color:var(--ok)}
+  ol{margin:0;padding-left:20px;color:var(--ink2);font-size:14.5px}
+  ol li{margin:7px 0}
+  .qrbox{display:flex;flex-direction:column;align-items:center;gap:12px;margin:20px 0 4px}
+  #qr{background:#fff;padding:12px;border-radius:12px;border:1px solid var(--line);width:300px;height:auto;max-width:100%}
+  .qrnote{font-size:12.5px;color:var(--muted);text-align:center}
+  .btn{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    background:var(--blue);color:#fff;text-decoration:none;padding:16px 20px;border-radius:14px;
+    font-weight:800;font-size:16px;margin-top:12px}
+  .btn.sec{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .btn small{display:block;font-weight:600;font-size:12px;opacity:.85;margin-top:2px}
+  .btn .arrow{font-size:20px;opacity:.9}
+  .warn{border-left:3px solid var(--accent);background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:14px 18px;margin-top:14px;font-size:14px;color:var(--ink2)}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--accent-soft);color:var(--accent-ink);
+    padding:1px 6px;border-radius:5px}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="var(--accent)"/>
+        <path d="M50 26a13 13 0 0 0-6 24.6V64a6 6 0 0 0 12 0V50.6A13 13 0 0 0 50 26z" fill="var(--paper)" opacity=".9"/>
+      </svg>
+      MiraKey Scan &amp; Go
+    </div>
+    <h1>ScanGo 태블릿 설치</h1>
+    <p class="sub">새 태블릿은 QR 한 번으로 키오스크까지 자동 설정됩니다. 이미 쓰던 태블릿은 아래에서 앱만 내려받아 설치하세요.</p>
+  </header>
+
+  <section>
+    <span class="tag new">새 태블릿 · PC 불필요</span>
+    <h2>1. QR 스캔으로 자동 설치</h2>
+    <p class="lead">공장초기화 상태에서 QR을 스캔하면 앱 설치 + 키오스크 잠금(device owner)까지 한 번에 끝납니다.</p>
+    <div class="card">
+      <ol>
+        <li>태블릿을 <b>공장초기화</b> 합니다 (설정 → 시스템 → 초기화).</li>
+        <li>첫 환영 화면(“Hi there”)을 <b>손가락으로 6번 연속 탭</b> 합니다.</li>
+        <li>QR 스캐너가 열리면 <b>WiFi를 선택해 연결</b> 합니다.</li>
+        <li>아래 QR을 스캔합니다. 앱이 자동으로 다운로드·설치되고 키오스크로 잠깁니다.</li>
+        <li>설치 후 <b>Account ID · License Code</b> 를 입력해 활성화합니다.</li>
+      </ol>
+      <div class="qrbox">
+        <img id="qr" src="provisioning-qr.png" alt="ScanGo 프로비저닝 QR" width="300" height="300">
+        <div class="qrnote">스캔 대상: 최신 릴리즈 APK (자동으로 항상 최신 버전)</div>
+      </div>
+      <div class="warn">
+        원격지원(RustDesk)과 화면공유 자동승인은 QR로 설정되지 않습니다.
+        해당 기능이 필요하면 설치 후 <code>install-all.sh</code> 를 1회 실행하세요.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="tag re">기존 태블릿 · 앱만 설치</span>
+    <h2>2. 브라우저로 직접 설치</h2>
+    <p class="lead">태블릿 브라우저로 이 페이지를 열고 아래 버튼을 누르면 됩니다. 최초 1회 “알 수 없는 앱 설치 허용”이 필요합니다.</p>
+    <a class="btn" href="https://github.com/wkseo75/scango-releases/releases/latest/download/ScanGoNative-release.apk">
+      <span>ScanGo 앱 내려받기<small>최신 버전 · 설치 후 자동 업데이트됨</small></span><span class="arrow">↓</span>
+    </a>
+    <a class="btn sec" href="https://github.com/wkseo75/scango-releases/releases/latest">
+      <span>릴리즈 노트 보기<small>버전별 변경 내용</small></span><span class="arrow">→</span>
+    </a>
+    <div class="warn">
+      이미 설치된 태블릿은 <b>직접 받을 필요가 없습니다</b>. 앱이 부팅 시와 6시간마다 스스로 최신 버전을 확인해 자동 설치합니다.
+    </div>
+  </section>
+
+  <footer>MiraKeyPOS · ScanGo 설치 페이지 · 문의 tech_support@goldenkeypos.com</footer>
+</div>
+
+
+</body>
+</html>
