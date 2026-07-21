@@ -90,7 +90,7 @@
       </ol>
       <div class="qrbox">
         <img id="qr" src="provisioning-qr.png" alt="ScanGo 프로비저닝 QR" width="300" height="300">
-        <div class="qrnote">스캔 대상: <b id="ver">ScanGo 2.4.1 (241)</b> · 릴리즈할 때마다 자동 갱신됩니다</div>
+        <div class="qrnote">스캔 대상: <b id="ver">ScanGo 2.4.2 (242)</b> · 릴리즈할 때마다 자동 갱신됩니다</div>
       </div>
       <div class="warn">
         활성화가 끝나면 아래 <b>3번</b> 절차로 원격지원을 켜 주세요. 버튼 두 번이면 끝납니다.
@@ -103,13 +103,24 @@
     <h2>2. 브라우저로 직접 설치</h2>
     <p class="lead">태블릿 브라우저로 이 페이지를 열고 아래 버튼을 누르면 됩니다. 최초 1회 “알 수 없는 앱 설치 허용”이 필요합니다.</p>
     <a class="btn" href="https://github.com/wkseo75/scango-releases/releases/latest/download/ScanGoNative-release.apk">
-      <span>ScanGo 앱 내려받기<small><b id="ver2">ScanGo 2.4.1 (241)</b> · 설치 후 자동 업데이트됨</small></span><span class="arrow">↓</span>
+      <span>ScanGo 앱 내려받기<small><b id="ver2">ScanGo 2.4.2 (242)</b> · 설치 후 자동 업데이트됨</small></span><span class="arrow">↓</span>
     </a>
     <a class="btn sec" href="https://github.com/wkseo75/scango-releases/releases/latest">
       <span>릴리즈 노트 보기<small>버전별 변경 내용</small></span><span class="arrow">→</span>
     </a>
     <div class="warn">
       이미 설치된 태블릿은 <b>직접 받을 필요가 없습니다</b>. 앱이 부팅 시와 6시간마다 스스로 최신 버전을 확인해 자동 설치합니다.
+    </div>
+    <div class="warn">
+      <b>이 방법으로 설치하면 접근성을 켤 때 “제한된 설정(Restricted setting)” 이라며 막힙니다.</b>
+      Android 13+ 가 브라우저로 받은 앱에 거는 보안 제한입니다. 아래처럼 한 번 풀어 주세요.
+      <div style="margin-top:6px">
+        설정 → <b>앱</b> → 전체 앱 보기 → <b>ScanGo</b> → 우측 상단 <b>⋮</b> → <b>제한된 설정 허용</b>
+      </div>
+      <div style="color:var(--muted);margin-top:4px">
+        ⋮ 에 그 항목이 안 보이면, 접근성에서 ScanGo 켜기를 한 번 시도해 그 팝업을 띄운 뒤 다시 열면 나타납니다.
+        <b>1번(QR 설치)</b> 로 설치한 태블릿은 이 제한이 걸리지 않습니다.
+      </div>
     </div>
   </section>
 
