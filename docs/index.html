@@ -54,9 +54,59 @@
   code{font-family:var(--mono);font-size:12.5px;background:var(--accent-soft);color:var(--accent-ink);
     padding:1px 6px;border-radius:5px}
   footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+
+  /* ── PIN 잠금 ─────────────────────────────────────────────────────────
+     공개 정적 페이지라 이것은 접근 통제가 아니라 방지턱이다. APK·QR 이미지는
+     이 화면을 거치지 않고 URL 로 바로 받을 수 있다. 설치 담당자가 아닌 사람이
+     실수로 절차를 따라가는 것을 막는 용도다. */
+  #gate{position:fixed;inset:0;z-index:50;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .panel{width:100%;max-width:340px;text-align:center}
+  #gate .lock{width:40px;height:40px;margin:0 auto 16px;color:var(--accent)}
+  #gate h2{font-size:20px;margin:0 0 6px}
+  #gate p{color:var(--muted);font-size:13.5px;margin:0 0 22px}
+  #dots{display:flex;gap:12px;justify-content:center;margin-bottom:8px}
+  #dots i{width:13px;height:13px;border-radius:50%;border:2px solid var(--line);
+    background:transparent;transition:background .12s,border-color .12s}
+  #dots i.on{background:var(--accent);border-color:var(--accent)}
+  #gate.bad #dots{animation:shake .35s}
+  @keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+  @media (prefers-reduced-motion:reduce){#gate.bad #dots{animation:none}}
+  #gerr{min-height:20px;font-size:13px;color:#c0392b;margin-bottom:14px}
+  @media (prefers-color-scheme:dark){#gerr{color:#ff8a80}}
+  #pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  #pad button{font-family:inherit;font-size:22px;font-weight:700;color:var(--ink);
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  #pad button:active{background:var(--accent-soft)}
+  #pad button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  #pad button.act{font-size:15px;font-weight:600;color:var(--muted)}
+  body.locked{overflow:hidden}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gtitle">
+  <div class="panel">
+    <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <rect x="4" y="10" width="16" height="11" rx="2.5"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+    </svg>
+    <h2 id="gtitle">설치 담당자 확인</h2>
+    <p>PIN 번호를 입력하세요</p>
+    <div id="dots"><i></i><i></i><i></i><i></i></div>
+    <div id="gerr" role="alert"></div>
+    <div id="pad">
+      <button type="button">1</button><button type="button">2</button><button type="button">3</button>
+      <button type="button">4</button><button type="button">5</button><button type="button">6</button>
+      <button type="button">7</button><button type="button">8</button><button type="button">9</button>
+      <button type="button" class="act" data-act="clear">지우기</button>
+      <button type="button">0</button>
+      <button type="button" class="act" data-act="back">←</button>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
   <header>
     <div class="brand">
@@ -195,6 +245,67 @@
   <footer>MiraKeyPOS · ScanGo 설치 페이지 · 문의 tech_support@goldenkeypos.com</footer>
 </div>
 
+<script>
+(function () {
+  var PIN = '2730';
+  var KEY = 'scango.installer.ok';
+  var gate = document.getElementById('gate');
+  var dots = document.getElementById('dots').children;
+  var err  = document.getElementById('gerr');
+  var buf  = '';
+
+  function unlock() {
+    gate.remove();
+    document.body.classList.remove('locked');
+  }
+
+  // 한 번 통과하면 이 태블릿에서는 다시 묻지 않는다(설치 중 여러 번 열기 때문).
+  try { if (localStorage.getItem(KEY) === '1') { unlock(); return; } } catch (e) {}
+
+  function paint() {
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].className = i < buf.length ? 'on' : '';
+    }
+  }
+
+  function submit() {
+    if (buf === PIN) {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      unlock();
+      return;
+    }
+    err.textContent = 'PIN 번호가 맞지 않습니다';
+    gate.classList.add('bad');
+    setTimeout(function () { gate.classList.remove('bad'); }, 350);
+    buf = '';
+    paint();
+  }
+
+  function push(d) {
+    if (buf.length >= PIN.length) return;
+    err.textContent = '';
+    buf += d;
+    paint();
+    if (buf.length === PIN.length) setTimeout(submit, 120);
+  }
+
+  document.getElementById('pad').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var act = b.dataset.act;
+    if (act === 'clear') { buf = ''; err.textContent = ''; paint(); }
+    else if (act === 'back') { buf = buf.slice(0, -1); err.textContent = ''; paint(); }
+    else push(b.textContent.trim());
+  });
+
+  // 물리 키보드(PC에서 열어볼 때)
+  document.addEventListener('keydown', function (e) {
+    if (!document.body.classList.contains('locked')) return;
+    if (e.key >= '0' && e.key <= '9') push(e.key);
+    else if (e.key === 'Backspace') { buf = buf.slice(0, -1); err.textContent = ''; paint(); }
+  });
+})();
+</script>
 
 </body>
 </html>
