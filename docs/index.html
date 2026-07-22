@@ -259,8 +259,9 @@
     document.body.classList.remove('locked');
   }
 
-  // 한 번 통과하면 이 태블릿에서는 다시 묻지 않는다(설치 중 여러 번 열기 때문).
-  try { if (localStorage.getItem(KEY) === '1') { unlock(); return; } } catch (e) {}
+  // 설치 중에는 이 페이지를 여러 번 열기 때문에 같은 세션 안에서는 다시 묻지 않는다.
+  // localStorage 가 아니라 sessionStorage 다 — 탭을 닫으면 다시 잠긴다(영구 해제 금지).
+  try { if (sessionStorage.getItem(KEY) === '1') { unlock(); return; } } catch (e) {}
 
   function paint() {
     for (var i = 0; i < dots.length; i++) {
@@ -270,7 +271,7 @@
 
   function submit() {
     if (buf === PIN) {
-      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
       unlock();
       return;
     }
